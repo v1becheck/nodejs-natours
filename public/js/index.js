@@ -118,3 +118,17 @@ if (bookBtn)
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
+
+// Loader functionality for overview page
+const loader = document.getElementById('loader');
+const currentPath = window.location.pathname;
+
+// Show loader for 0.5 seconds on overview page (root path)
+if (currentPath === '/' && loader) {
+  setTimeout(() => {
+    loader.classList.add('hidden');
+  }, 500);
+} else if (loader) {
+  // Hide loader immediately for other pages
+  loader.classList.add('hidden');
+}

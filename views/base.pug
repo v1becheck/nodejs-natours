@@ -12,6 +12,10 @@ html
       script(src='https://js.stripe.com/v3/')
     
   body(data-alert=`${alert ? alert : ''}`) 
+    // LOADER
+    .loader#loader
+      .loader__spinner
+
     // HEADER
     include _header
 
