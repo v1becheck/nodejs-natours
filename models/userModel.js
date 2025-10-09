@@ -69,8 +69,8 @@ userSchema.pre('save', async function (next) {
   // Only run if password is modified
   if (!this.isModified('password')) return next();
 
-  // Has the password with CPU cost of 10
-  this.password = await bcrypt.hash(this.password, 10);
+  // Has the password with CPU cost of 4
+  this.password = await bcrypt.hash(this.password, 4);
   // Dont persist confirm password to the DB
   this.passwordConfirm = undefined;
   next();
