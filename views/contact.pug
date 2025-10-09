@@ -1,0 +1,96 @@
+extends base
+
+block content 
+  main.main
+    section.section-header
+      .header__hero
+        .header__hero-overlay &nbsp;
+        img.header__hero-img(src='/img/tours/tour-5-cover.jpg', alt='Contact Hero')
+      .heading-box
+        h1.heading-primary
+          span Contact Us
+        .heading-box__group
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-phone')
+            span.heading-box__text Get in Touch
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-clock')
+            span.heading-box__text 24/7 Support
+
+    section.section-contact
+      .row
+        .col-1-of-2
+          .contact-info
+            h3.heading-secondary.ma-bt-sm Get in touch with us
+            p.paragraph(style='font-size:1.5rem;')
+              | Have questions about our tours? Need help planning your next adventure? 
+              | Want to share feedback about your experience? We're here to help!
+            p.paragraph(style='font-size:1.5rem;')
+              | Our customer service team is available 24/7 to assist you with 
+              | booking, planning, and any questions you might have about your 
+              | upcoming adventures.
+
+            .contact-details
+              .contact-item
+                svg.contact-icon
+                  use(xlink:href='/img/icons.svg#icon-phone')
+                .contact-text
+                  h4.heading-quaternary Phone
+                  p +1 (555) 123-4567
+                  p +1 (555) 987-6543
+
+              .contact-item
+                svg.contact-icon
+                  use(xlink:href='/img/icons.svg#icon-mail')
+                .contact-text
+                  h4.heading-quaternary Email
+                  p info@natours.com
+                  p support@natours.com
+
+              .contact-item
+                svg.contact-icon
+                  use(xlink:href='/img/icons.svg#icon-map-pin')
+                .contact-text
+                  h4.heading-quaternary Office
+                  p 123 Adventure Street
+                  p San Francisco, CA 94105
+
+              .contact-item
+                svg.contact-icon
+                  use(xlink:href='/img/icons.svg#icon-clock')
+                .contact-text
+                  h4.heading-quaternary Hours
+                  p Monday - Friday: 9AM - 6PM
+                  p Saturday - Sunday: 10AM - 4PM
+
+        .col-1-of-2
+          .contact-form
+            form.form.form--contact
+              .form__group
+                label.form__label(for='name') Full name
+                input#name.form__input(type='text', placeholder='Your full name', required)
+              .form__group
+                label.form__label(for='email') Email address
+                input#email.form__input(type='email', placeholder='your@email.com', required)
+              .form__group
+                label.form__label(for='phone') Phone number
+                input#phone.form__input(type='tel', placeholder='+1 (555) 123-4567')
+              .form__group
+                label.form__label(for='subject') Subject
+                select#subject.form__input(required)
+                  option(value='') Select a subject
+                  option(value='booking') Booking Inquiry
+                  option(value='support') Customer Support
+                  option(value='feedback') Feedback
+                  option(value='partnership') Partnership
+                  option(value='guide-application') Guide Application
+                  option(value='career') Career Opportunity
+                  option(value='other') Other
+              .form__group
+                label.form__label(for='message') Message
+                textarea#message.form__input(rows='6', placeholder='Tell us how we can help you...', required)
+              .form__group
+                button.btn.btn--green Send Message
+

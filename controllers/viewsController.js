@@ -102,3 +102,33 @@ exports.updateUserData = catchAsync(async (req, res) => {
     user: updatedUser,
   });
 });
+
+exports.getAbout = catchAsync(async (req, res) => {
+  res.status(200).render('about', {
+    title: 'About Us',
+  });
+});
+
+exports.getDownloadApps = catchAsync(async (req, res) => {
+  res.status(200).render('downloadApps', {
+    title: 'Download Apps',
+  });
+});
+
+exports.getBecomeGuide = catchAsync(async (req, res) => {
+  res.status(200).render('becomeGuide', {
+    title: 'Become a Guide',
+  });
+});
+
+exports.getCareers = catchAsync(async (req, res) => {
+  res.status(200).render('careers', {
+    title: 'Careers',
+  });
+});
+
+exports.getContact = catchAsync(async (req, res) => {
+  res.status(200).render('contact', {
+    title: 'Contact Us',
+  });
+});

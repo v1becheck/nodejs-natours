@@ -1,0 +1,89 @@
+extends base
+
+block content 
+  main.main
+    section.section-header
+      .header__hero
+        .header__hero-overlay &nbsp;
+        img.header__hero-img(src='/img/tours/tour-4-cover.jpg', alt='Careers Hero')
+      .heading-box
+        h1.heading-primary
+          span Careers at Natours
+        .heading-box__group
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-briefcase')
+            span.heading-box__text Join Our Team
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-star')
+            span.heading-box__text Build Your Future
+
+    section.section-features#openings
+      .u-center-text.ma-bt-big
+        h2.heading-secondary Current Openings
+      .row
+        .col-1-of-2
+          .job-card
+            h3.heading-tertiary.ma-bt-sm Senior Software Engineer
+            p.job-location
+              svg.job-icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              | Remote / San Francisco
+            p.job-description
+              | Lead development of our booking platform and mobile apps. 
+              | Work with React, Node.js, and modern cloud technologies.
+            .job-tags
+              span.job-tag Full-time
+              span.job-tag Remote
+              span.job-tag Senior
+            a.btn.btn--green.btn--small(href='/contact') Apply Now
+
+        .col-1-of-2
+          .job-card
+            h3.heading-tertiary.ma-bt-sm Marketing Manager
+            p.job-location
+              svg.job-icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              | New York
+            p.job-description
+              | Drive growth through digital marketing campaigns, social media, 
+              | and partnerships with travel influencers and agencies.
+            .job-tags
+              span.job-tag Full-time
+              span.job-tag Marketing
+              span.job-tag Mid-level
+            a.btn.btn--green.btn--small(href='/contact') Apply Now
+
+        .col-1-of-2
+          .job-card
+            h3.heading-tertiary.ma-bt-sm Customer Success Specialist
+            p.job-location
+              svg.job-icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              | Remote
+            p.job-description
+              | Help customers plan their perfect adventure and ensure 
+              | exceptional experiences from booking to completion.
+            .job-tags
+              span.job-tag Full-time
+              span.job-tag Remote
+              span.job-tag Entry-level
+            a.btn.btn--green.btn--small(href='/contact') Apply Now
+
+        .col-1-of-2
+          .job-card
+            h3.heading-tertiary.ma-bt-sm Operations Coordinator
+            p.job-location
+              svg.job-icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              | London
+            p.job-description
+              | Coordinate tour logistics, manage vendor relationships, 
+              | and ensure smooth operations across multiple destinations.
+            .job-tags
+              span.job-tag Full-time
+              span.job-tag Operations
+              span.job-tag Mid-level
+            a.btn.btn--green.btn--small(href='/contact') Apply Now
+

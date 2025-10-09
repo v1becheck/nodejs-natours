@@ -1,0 +1,31 @@
+extends base
+
+block content 
+  main.main
+    section.section-header
+      .header__hero
+        .header__hero-overlay &nbsp;
+        img.header__hero-img(src='/img/tours/tour-3-cover.jpg', alt='Become Guide Hero')
+      .heading-box
+        h1.heading-primary
+          span Become a Guide
+        .heading-box__group
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-users')
+            span.heading-box__text Join Our Team
+          .heading-box__detail
+            svg.heading-box__icon
+              use(xlink:href='/img/icons.svg#icon-compass')
+            span.heading-box__text Share Your Passion
+
+    section.section-cta#apply
+      .cta
+        .cta__img.cta__img--logo
+          img(src='/img/logo-white.png', alt='Natours logo')
+        .cta__content
+          h2.heading-secondary Ready to become a guide?
+          p.cta__text
+            | Join our team of passionate adventure guides and help create 
+            | unforgettable experiences for travelers worldwide.
+          a.btn.btn--green.span-all-rows(href='/contact') Apply Now!

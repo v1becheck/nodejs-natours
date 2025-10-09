@@ -137,6 +137,359 @@ body {
   font-weight: 400;
 }
 
+.section-header {
+  height: 85vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('../img/hero-1.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.header__hero {
+  height: 100%;
+  position: relative;
+}
+
+.header__hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(85, 197, 122, 0.8) 0%,
+    rgba(40, 180, 133, 0.8) 100%
+  );
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.header__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.heading-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.heading-box__group {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.heading-box__detail {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+}
+
+.heading-box__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: currentColor;
+}
+
+.heading-box__text {
+  font-size: 1.6rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Section spacing for new pages */
+.section-description,
+.section-features,
+.section-stories,
+.section-contact,
+.section-map {
+  padding: 15rem 0;
+  margin-top: -10rem;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Download Apps Styles */
+.download-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.download-buttons .btn {
+  min-width: 16rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.download-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.8rem;
+}
+
+/* Job Cards */
+.job-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 3rem;
+  transition: all 0.3s ease;
+  border: 1px solid #f1f1f1;
+}
+
+.job-card:hover {
+  transform: translateY(-1rem);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+}
+
+.job-location {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  color: #55c57a;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.job-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: currentColor;
+}
+
+.job-description {
+  margin-bottom: 2rem;
+  color: #777;
+  line-height: 1.7;
+  font-size: 1.4rem;
+}
+
+.job-tags {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.job-tag {
+  background: #f7f7f7;
+  color: #55c57a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Contact Styles */
+.contact-info {
+  padding: 0;
+}
+
+.contact-details {
+  margin-top: 4rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: #55c57a;
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+}
+
+.contact-text h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.contact-text p {
+  color: #777;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.contact-form {
+  background: white;
+  padding: 4rem;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  border: 1px solid #f1f1f1;
+}
+
+.form--contact .form__group {
+  margin-bottom: 3rem;
+}
+
+.form--contact .form__label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form--contact .form__input {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+  background: #f7f7f7;
+}
+
+.form--contact .form__input:focus {
+  outline: none;
+  border-color: #55c57a;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(85, 197, 122, 0.1);
+}
+
+.map-container {
+  height: 50vh;
+  margin-top: 6rem;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 75em) {
+  .section-header {
+    height: 70vh;
+  }
+
+  .heading-box__group {
+    gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .section-header {
+    height: 60vh;
+  }
+
+  .heading-box__group {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .heading-box__detail {
+    font-size: 1.4rem;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .download-buttons .btn {
+    width: 100%;
+    max-width: 25rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .job-tags {
+    justify-content: center;
+  }
+
+  .section-description,
+  .section-features,
+  .section-stories,
+  .section-contact,
+  .section-map {
+    padding: 10rem 0;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .section-header {
+    height: 50vh;
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  .heading-box {
+    top: 35%;
+  }
+
+  .heading-box__text {
+    font-size: 1.4rem;
+  }
+
+  .contact-form {
+    padding: 2rem;
+  }
+
+  .job-card {
+    padding: 2rem;
+  }
+
+  .section-description,
+  .section-features,
+  .section-stories,
+  .section-contact,
+  .section-map {
+    padding: 8rem 0;
+  }
+}
+
 .alert {
   position: fixed;
   top: 0;
