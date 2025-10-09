@@ -123,11 +123,38 @@ if (alertMessage) showAlert('success', alertMessage, 20);
 const loader = document.getElementById('loader');
 const currentPath = window.location.pathname;
 
-// Show loader for 0.5 seconds on overview page (root path)
+// Show loader until all images are loaded on overview page (root path)
 if (currentPath === '/' && loader) {
-  setTimeout(() => {
-    loader.classList.add('hidden');
-  }, 500);
+  const images = document.querySelectorAll('img');
+  let imagesLoaded = 0;
+  const totalImages = images.length;
+
+  if (totalImages === 0) {
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 300);
+  } else {
+    const checkAllImagesLoaded = () => {
+      imagesLoaded++;
+      if (imagesLoaded === totalImages) {
+        loader.classList.add('hidden');
+      }
+    };
+
+    images.forEach((img) => {
+      if (img.complete && img.naturalHeight !== 0) {
+        checkAllImagesLoaded();
+      } else {
+        img.addEventListener('load', checkAllImagesLoaded);
+        img.addEventListener('error', checkAllImagesLoaded);
+      }
+    });
+
+    // Fallback: hide loader after 2 seconds maximum
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 2000);
+  }
 } else if (loader) {
   // Hide loader immediately for other pages
   loader.classList.add('hidden');
