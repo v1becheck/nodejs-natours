@@ -1679,7 +1679,7 @@ body {
 }
 .section-description > * {
   padding: 0 8vw;
-  padding-top: 14vw;
+  padding-top: 5vw;
   padding-bottom: calc(1vw + var(--section-rotate));
   -webkit-box-flex: 0;
   -ms-flex: 0 0 50%;
@@ -1760,9 +1760,10 @@ body {
     100% calc(100% - var(--section-rotate)),
     0 100%
   );
-  margin-top: calc(0px - var(--section-rotate));
+  margin-top: calc(0rem - var(--section-rotate));
   position: relative;
   z-index: 1000;
+  padding-bottom: 5rem;
 }
 
 .picture-box__img {
