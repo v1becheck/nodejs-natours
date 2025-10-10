@@ -221,7 +221,7 @@ body {
 .section-contact,
 .section-map {
   padding: 0;
-  margin-top: -10rem;
+  margin-top: 5rem;
   position: relative;
   z-index: 1000;
 }
@@ -456,6 +456,11 @@ body {
   .section-map {
     padding: 10rem 0;
   }
+}
+
+.section-features p {
+  font-size: 1.6rem;
+  margin-bottom: 40px;
 }
 
 @media only screen and (max-width: 37.5em) {
