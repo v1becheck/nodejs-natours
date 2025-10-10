@@ -220,7 +220,7 @@ body {
 .section-stories,
 .section-contact,
 .section-map {
-  padding: 15rem 0;
+  padding: 0;
   margin-top: -10rem;
   position: relative;
   z-index: 1000;
