@@ -15,7 +15,7 @@ Choose a tour, check details, book a tour in the lower part of the page. (Book T
 Use dummy credit card credentials if you wish to book a tour:<br><br>
 <em>Card information:</em><br>
 CC Number: 4242 4242 4242 4242 (this is a test card)<br>
-Expiry date: 06/24 CVC: 456 (or use random dates and numbers)<br>
+Expiry date: Use date and CVC that you like<br>
 Name: Use name that you like<br>
 State: Pick one that you like<br>
 <br>
