@@ -2373,7 +2373,7 @@ body {
     to(#28b487)
   );
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-  opacity: 0.7;
+  opacity: 0.9;
 }
 .card__picture-img {
   -o-object-fit: cover;
