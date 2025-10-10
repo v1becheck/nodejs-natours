@@ -71,6 +71,70 @@ exports.getDestinations = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getStories = catchAsync(async (req, res, next) => {
+  // 1. Get tours with reviews for stories
+  const toursWithReviews = await Tour.find({ ratingsQuantity: { $gte: 5 } })
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'user',
+        select: 'name photo',
+      },
+    })
+    .limit(8);
+
+  // 2. Create travel stories from reviews
+  const travelStories = toursWithReviews.map((tour) => {
+    const recentReview = tour.reviews[tour.reviews.length - 1];
+    return {
+      id: tour._id,
+      tourName: tour.name,
+      tourImage: tour.imageCover,
+      tourSlug: tour.slug,
+      story: recentReview.review,
+      author: recentReview.user.name,
+      authorPhoto: recentReview.user.photo,
+      rating: recentReview.rating,
+      date: recentReview.createdAt,
+      location: tour.startLocation.description,
+      duration: tour.duration,
+    };
+  });
+
+  // 3. Create featured stories (top rated)
+  const featuredStories = travelStories.slice(0, 3);
+
+  // 4. Create story categories
+  const storyCategories = [
+    {
+      name: 'Adventure Stories',
+      description: "Epic tales from the world's most challenging adventures",
+      icon: 'icon-trending-up',
+      stories: travelStories.filter((story) => story.rating >= 4.5).slice(0, 2),
+    },
+    {
+      name: 'Cultural Experiences',
+      description: 'Heartwarming stories of cultural discovery and connection',
+      icon: 'icon-users',
+      stories: travelStories.filter((story) => story.rating >= 4.0).slice(0, 2),
+    },
+    {
+      name: 'Hidden Gems',
+      description: 'Discoveries of secret places and unexpected adventures',
+      icon: 'icon-map-pin',
+      stories: travelStories.filter((story) => story.rating >= 4.2).slice(0, 2),
+    },
+  ];
+
+  // 5. Render the stories template
+  res.status(200).render('stories', {
+    title: 'Travel Stories',
+    travelStories,
+    featuredStories,
+    storyCategories,
+  });
+});
+
 exports.getTour = catchAsync(async (req, res, next) => {
   // 1. Get the data, for the requested tour (including reviews and tour-guides)
   const tour = await Tour.findOne({ slug: req.params.slug }).populate({

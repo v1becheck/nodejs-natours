@@ -1,0 +1,128 @@
+extends base
+
+block content 
+  main.main
+    // Hero Section
+    section.stories-hero
+      .stories-hero__content
+        h1.stories-hero__title Travel Stories
+        p.stories-hero__subtitle Real adventures, real experiences, real stories from travelers just like you
+        .stories-hero__stats
+          .stat
+            .stat__number 500+
+            .stat__label Stories
+          .stat
+            .stat__number 50+
+            .stat__label Countries
+          .stat
+            .stat__number 4.8
+            .stat__label Rating
+
+    // Featured Stories Section
+    section.featured-stories
+      .container
+        h2.featured-stories__title Featured Stories
+        p.featured-stories__subtitle
+          | Discover the most inspiring travel experiences from our community of adventurers
+        .featured-stories__grid
+          each story in featuredStories
+            .featured-story
+              .featured-story__image
+                img(src=`/img/tours/${story.tourImage}` alt=story.tourName)
+                .featured-story__badge Featured
+              .featured-story__content
+                .featured-story__header
+                  h3.featured-story__title= story.tourName
+                  .featured-story__rating
+                    - for (let i = 1; i <= 5; i++)
+                      if i <= story.rating
+                        svg.featured-story__star.featured-story__star--active
+                          use(xlink:href='img/icons.svg#icon-star')
+                      else
+                        svg.featured-story__star.featured-story__star--inactive
+                          use(xlink:href='img/icons.svg#icon-star')
+                p.featured-story__excerpt= story.story.substring(0, 150) + '...'
+                .featured-story__author
+                  img.featured-story__author-photo(src=`/img/users/${story.authorPhoto}` alt=story.author)
+                  .featured-story__author-info
+                    .featured-story__author-name= story.author
+                    .featured-story__location
+                      svg.featured-story__location-icon
+                        use(xlink:href='img/icons.svg#icon-map-pin')
+                      span= story.location
+                a.btn.btn--green.btn--small(href=`/tour/${story.tourSlug}`) Read Full Story
+
+    // Story Categories Section
+    section.story-categories
+      .container
+        h2.story-categories__title Stories by Category
+        .story-categories__grid
+          each category in storyCategories
+            .story-category
+              .story-category__header
+                .story-category__icon
+                  svg
+                    use(xlink:href=`img/icons.svg#${category.icon}`)
+                h3.story-category__title= category.name
+                p.story-category__description= category.description
+              .story-category__stories
+                each story in category.stories
+                  .story-card
+                    .story-card__image
+                      img(src=`/img/tours/${story.tourImage}` alt=story.tourName)
+                    .story-card__content
+                      h4.story-card__title= story.tourName
+                      p.story-card__excerpt= story.story.substring(0, 100) + '...'
+                      .story-card__meta
+                        .story-card__author
+                          img.story-card__author-photo(src=`/img/users/${story.authorPhoto}` alt=story.author)
+                          span.story-card__author-name= story.author
+                        .story-card__rating
+                          - for (let i = 1; i <= 5; i++)
+                            if i <= story.rating
+                              svg.story-card__star.story-card__star--active
+                                use(xlink:href='img/icons.svg#icon-star')
+                            else
+                              svg.story-card__star.story-card__star--inactive
+                                use(xlink:href='img/icons.svg#icon-star')
+                      a.btn.btn--green.btn--small(href=`/tour/${story.tourSlug}`) Read More
+
+    // All Stories Section
+    section.all-stories
+      .container
+        h2.all-stories__title All Travel Stories
+        p.all-stories__subtitle
+          | Browse through our complete collection of travel experiences and find inspiration for your next adventure
+        .all-stories__grid
+          each story in travelStories
+            .story-item
+              .story-item__image
+                img(src=`/img/tours/${story.tourImage}` alt=story.tourName)
+              .story-item__content
+                h3.story-item__title= story.tourName
+                p.story-item__excerpt= story.story.substring(0, 120) + '...'
+                .story-item__meta
+                  .story-item__author
+                    img.story-item__author-photo(src=`/img/users/${story.authorPhoto}` alt=story.author)
+                    .story-item__author-info
+                      .story-item__author-name= story.author
+                      .story-item__date= story.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+                  .story-item__rating
+                    - for (let i = 1; i <= 5; i++)
+                      if i <= story.rating
+                        svg.story-item__star.story-item__star--active
+                          use(xlink:href='img/icons.svg#icon-star')
+                      else
+                        svg.story-item__star.story-item__star--inactive
+                          use(xlink:href='img/icons.svg#icon-star')
+                a.btn.btn--green.btn--small(href=`/tour/${story.tourSlug}`) Read Story
+
+    // Call to Action
+    section.stories-cta
+      .stories-cta__content
+        h2.stories-cta__title Share Your Story
+        p.stories-cta__text
+          | Have an amazing travel experience to share? Join our community and inspire others with your adventure stories.
+        .stories-cta__buttons
+          a.btn.btn--white.btn--large(href='/') Book Your Adventure
+          a.btn.btn--green.btn--large(href='/signup') Join Our Community

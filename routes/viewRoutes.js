@@ -24,6 +24,7 @@ router.get(
   authController.isLoggedIn,
   viewsController.getDestinations
 );
+router.get('/stories', authController.isLoggedIn, viewsController.getStories);
 router.get('/about', authController.isLoggedIn, viewsController.getAbout);
 router.get(
   '/download-apps',
