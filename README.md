@@ -1,6 +1,6 @@
 # natours
 
-Tourism web application.<br>
+Tourism web application focusing on using back-end best practices.<br>
 
 Live: https://natours-production-milos.up.railway.app/ 
 
