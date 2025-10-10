@@ -773,6 +773,83 @@ body {
 
 /* End pulse button */
 
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(135deg, #7dd56f, #28b487);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(2rem);
+  transition: all 0.3s ease;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+.scroll-to-top:active {
+  transform: translateY(0);
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: white;
+  transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover .scroll-to-top__icon {
+  transform: translateY(-0.2rem);
+}
+
+/* Responsive scroll to top button */
+@media only screen and (max-width: 56.25em) {
+  .scroll-to-top {
+    bottom: 2rem;
+    right: 2rem;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .scroll-to-top__icon {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .scroll-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .scroll-to-top__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 /* Stories Page Styles */
 .stories-hero {
   background: linear-gradient(

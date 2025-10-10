@@ -27,6 +27,11 @@ html
     // FOOTER
     include _footer
 
+    // Scroll to top button
+    button.scroll-to-top#scrollToTop
+      svg.scroll-to-top__icon
+        use(xlink:href='img/icons.svg#icon-arrow-up')
+
     script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js" integrity="sha512-nnNHpffPSgINrsR8ZAIgFUIMexORL5tPwsfktOTxVYSv+AUAILuFYWES8IHl+hhIhpFGlKvWFiz9ZEusrPcSBQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
     //- script(type='module' src='/js/login.js')
     //- script(type='module' src='/js/leaflet.js')
