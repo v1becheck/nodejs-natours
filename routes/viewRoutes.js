@@ -20,11 +20,19 @@ router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
-router.get('/about', viewsController.getAbout);
-router.get('/download-apps', viewsController.getDownloadApps);
-router.get('/become-guide', viewsController.getBecomeGuide);
-router.get('/careers', viewsController.getCareers);
-router.get('/contact', viewsController.getContact);
+router.get('/about', authController.isLoggedIn, viewsController.getAbout);
+router.get(
+  '/download-apps',
+  authController.isLoggedIn,
+  viewsController.getDownloadApps
+);
+router.get(
+  '/become-guide',
+  authController.isLoggedIn,
+  viewsController.getBecomeGuide
+);
+router.get('/careers', authController.isLoggedIn, viewsController.getCareers);
+router.get('/contact', authController.isLoggedIn, viewsController.getContact);
 
 // UPDATE USER DATA WITHOUT API
 router.post(
