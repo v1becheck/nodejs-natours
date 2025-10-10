@@ -768,6 +768,240 @@ body {
 
 /* End pulse button */
 
+/* Hero Introduction Section */
+.hero-intro {
+  background: linear-gradient(
+    135deg,
+    rgba(85, 197, 122, 0.9) 0%,
+    rgba(40, 180, 133, 0.9) 100%
+  );
+  padding: 8rem 6rem;
+  text-align: center;
+  color: white;
+  margin: -8rem -6rem 6rem -6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('../img/tours/tour-1-cover.jpg') center/cover;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.hero-intro__content {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.hero-intro__title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.hero-intro__subtitle {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 4rem;
+  opacity: 0.95;
+  line-height: 1.4;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-intro__features {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.hero-intro__feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1.5rem 2.5rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.hero-intro__feature:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hero-intro__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: currentColor;
+}
+
+/* Stats Section */
+.stats-section {
+  background: white;
+  padding: 6rem 0;
+  margin-bottom: 4rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.stats-container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 6rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #55c57a;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1.4rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Tours Section Header */
+.tours-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.tours-section-subtitle {
+  font-size: 1.8rem;
+  color: #777;
+  max-width: 60rem;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Responsive Design for Hero and Stats */
+@media only screen and (max-width: 75em) {
+  .hero-intro__title {
+    font-size: 3.5rem;
+  }
+
+  .hero-intro__subtitle {
+    font-size: 1.8rem;
+  }
+
+  .hero-intro__features {
+    gap: 2rem;
+  }
+
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .hero-intro {
+    padding: 6rem 4rem;
+    margin: -8rem -6rem 4rem -6rem;
+  }
+
+  .hero-intro__title {
+    font-size: 3rem;
+  }
+
+  .hero-intro__subtitle {
+    font-size: 1.6rem;
+  }
+
+  .hero-intro__features {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero-intro__feature {
+    width: 100%;
+    max-width: 30rem;
+    justify-content: center;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 4rem;
+  }
+
+  .tours-section-subtitle {
+    font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .hero-intro {
+    padding: 4rem 2rem;
+    margin: -8rem -6rem 3rem -6rem;
+  }
+
+  .hero-intro__title {
+    font-size: 2.5rem;
+  }
+
+  .hero-intro__subtitle {
+    font-size: 1.4rem;
+  }
+
+  .hero-intro__feature {
+    font-size: 1.4rem;
+    padding: 1.2rem 2rem;
+  }
+
+  .stats-container {
+    padding: 0 2rem;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+
+  .tours-section-subtitle {
+    font-size: 1.4rem;
+  }
+}
+
 .header {
   background-color: #444;
   padding: 0 5rem;

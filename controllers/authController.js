@@ -117,10 +117,11 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // Only for rendered pages, no errors!
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (!token) return next();
-  if (token) {
+exports.isLoggedIn = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (!token) return next();
+
     // 1. Verify the token
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
@@ -136,8 +137,11 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     // There is a logged in user; Each template has access to res.locals
     res.locals.user = currentUser;
     return next();
+  } catch (err) {
+    // If token is invalid or expired, just continue without setting user
+    return next();
   }
-});
+};
 
 exports.restrictTo =
   (...roles) =>

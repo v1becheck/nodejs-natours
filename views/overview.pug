@@ -6,6 +6,47 @@ block content
       div.heading-secondary-page-heading.ma-bt-xlg
         h3 Your bookings
     else
+      // Hero Introduction Section
+      section.hero-intro
+        .hero-intro__content
+          h1.hero-intro__title Discover Amazing Adventures
+          p.hero-intro__subtitle Experience the world's most breathtaking destinations with expert guides and unforgettable memories
+          .hero-intro__features
+            .hero-intro__feature
+              svg.hero-intro__icon
+                use(xlink:href='img/icons.svg#icon-map-pin')
+              span Expert Local Guides
+            .hero-intro__feature
+              svg.hero-intro__icon
+                use(xlink:href='img/icons.svg#icon-star')
+              span 5-Star Rated Tours
+            .hero-intro__feature
+              svg.hero-intro__icon
+                use(xlink:href='img/icons.svg#icon-heart')
+              span Small Group Adventures
+
+      // Stats Section
+      section.stats-section
+        .stats-container
+          .stat-item
+            .stat-number 10,000+
+            .stat-label Happy Travelers
+          .stat-item
+            .stat-number 50+
+            .stat-label Destinations
+          .stat-item
+            .stat-number 4.9
+            .stat-label Average Rating
+          .stat-item
+            .stat-number 15
+            .stat-label Years Experience
+
+      // Tours Section Header
+      .tours-section-header
+        h2.heading-secondary-page-heading.ma-bt-xlg
+          span Explore Our Tours
+        p.tours-section-subtitle Choose from our carefully curated selection of adventure tours around the world
+
     .card-container
     
 
