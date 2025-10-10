@@ -24,6 +24,53 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getDestinations = catchAsync(async (req, res, next) => {
+  // 1. Get featured tours data from collection
+  const featuredTours = await Tour.find({
+    ratingsAverage: { $gte: 4.5 },
+  }).limit(6);
+  const allTours = await Tour.find();
+
+  // 2. Create destination categories
+  const destinations = [
+    {
+      name: 'Mountain Adventures',
+      description: "Conquer the world's most breathtaking peaks",
+      image: 'tour-1-cover.jpg',
+      tourCount: allTours.filter((tour) => tour.difficulty === 'difficult')
+        .length,
+      featuredTours: featuredTours
+        .filter((tour) => tour.difficulty === 'difficult')
+        .slice(0, 2),
+    },
+    {
+      name: 'Coastal Escapes',
+      description: 'Discover pristine beaches and coastal wonders',
+      image: 'tour-2-cover.jpg',
+      tourCount: allTours.filter((tour) => tour.difficulty === 'easy').length,
+      featuredTours: featuredTours
+        .filter((tour) => tour.difficulty === 'easy')
+        .slice(0, 2),
+    },
+    {
+      name: 'Cultural Journeys',
+      description: 'Immerse yourself in rich traditions and history',
+      image: 'tour-3-cover.jpg',
+      tourCount: allTours.filter((tour) => tour.difficulty === 'medium').length,
+      featuredTours: featuredTours
+        .filter((tour) => tour.difficulty === 'medium')
+        .slice(0, 2),
+    },
+  ];
+
+  // 3. Render the destinations template
+  res.status(200).render('destinations', {
+    title: 'Featured Destinations',
+    destinations,
+    featuredTours,
+  });
+});
+
 exports.getTour = catchAsync(async (req, res, next) => {
   // 1. Get the data, for the requested tour (including reviews and tour-guides)
   const tour = await Tour.findOne({ slug: req.params.slug }).populate({

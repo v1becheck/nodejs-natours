@@ -1,7 +1,6 @@
 const express = require('express');
 const viewsController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
-const bookingController = require('../controllers/bookingController');
 
 const router = express.Router();
 
@@ -20,6 +19,11 @@ router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
+router.get(
+  '/destinations',
+  authController.isLoggedIn,
+  viewsController.getDestinations
+);
 router.get('/about', authController.isLoggedIn, viewsController.getAbout);
 router.get(
   '/download-apps',

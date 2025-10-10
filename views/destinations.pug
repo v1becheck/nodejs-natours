@@ -1,0 +1,96 @@
+extends base
+
+block content 
+  main.main
+    // Hero Section
+    section.destinations-hero
+      .destinations-hero__content
+        h1.destinations-hero__title Discover Amazing Destinations
+        p.destinations-hero__subtitle Explore the world's most incredible places with our carefully curated collection of adventure destinations
+        .destinations-hero__stats
+          .stat
+            .stat__number 50+
+            .stat__label Destinations
+          .stat
+            .stat__number 200+
+            .stat__label Tours
+          .stat
+            .stat__number 4.9
+            .stat__label Rating
+
+    // Destinations Grid
+    section.destinations-grid
+      .container
+        h2.destinations-grid__title Choose Your Adventure
+        .destinations-grid__content
+          each destination in destinations
+            .destination-card
+              .destination-card__image
+                img(src=`/img/tours/${destination.image}` alt=destination.name)
+                .destination-card__overlay
+                  .destination-card__badge= `${destination.tourCount} Tours`
+              .destination-card__content
+                h3.destination-card__title= destination.name
+                p.destination-card__description= destination.description
+                .destination-card__tours
+                  each tour in destination.featuredTours
+                    .mini-tour
+                      .mini-tour__image
+                        img(src=`/img/tours/${tour.imageCover}` alt=tour.name)
+                      .mini-tour__info
+                        h4.mini-tour__name= tour.name
+                        .mini-tour__rating
+                          .mini-tour__stars
+                            - for (let i = 1; i <= 5; i++)
+                              if i <= Math.round(tour.ratingsAverage)
+                                svg.mini-tour__star.mini-tour__star--active
+                                  use(xlink:href='img/icons.svg#icon-star')
+                              else
+                                svg.mini-tour__star.mini-tour__star--inactive
+                                  use(xlink:href='img/icons.svg#icon-star')
+                          span.mini-tour__rating-text= `${tour.ratingsAverage} (${tour.ratingsQuantity})`
+                a.btn.btn--green.btn--small.destination-card__btn(href='/') Explore All Tours
+
+    // Featured Tours Section
+    section.featured-tours
+      .container
+        h2.featured-tours__title Our Top Rated Adventures
+        .featured-tours__grid
+          each tour in featuredTours
+            .featured-tour
+              .featured-tour__image
+                img(src=`/img/tours/${tour.imageCover}` alt=tour.name)
+                .featured-tour__badge Top Rated
+              .featured-tour__content
+                h3.featured-tour__title= tour.name
+                p.featured-tour__summary= tour.summary
+                .featured-tour__details
+                  .featured-tour__detail
+                    svg.featured-tour__icon
+                      use(xlink:href='img/icons.svg#icon-map-pin')
+                    span= tour.startLocation.description
+                  .featured-tour__detail
+                    svg.featured-tour__icon
+                      use(xlink:href='img/icons.svg#icon-calendar')
+                    span= `${tour.duration} days`
+                  .featured-tour__detail
+                    svg.featured-tour__icon
+                      use(xlink:href='img/icons.svg#icon-user')
+                    span= `${tour.maxGroupSize} people`
+                .featured-tour__footer
+                  .featured-tour__price
+                    span.featured-tour__price-value= `$${tour.price}`
+                    span.featured-tour__price-text per person
+                  .featured-tour__rating
+                    span.featured-tour__rating-value= tour.ratingsAverage
+                    span.featured-tour__rating-text= `(${tour.ratingsQuantity} ratings)`
+                  a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) View Details
+
+    // Call to Action
+    section.destinations-cta
+      .destinations-cta__content
+        h2.destinations-cta__title Ready for Your Next Adventure?
+        p.destinations-cta__text Join thousands of travelers who have discovered the world with Natours
+        .destinations-cta__buttons
+          a.btn.btn--white.btn--large(href='/') Browse All Tours
+          a.btn.btn--green.btn--large(href='/signup') Start Your Journey
