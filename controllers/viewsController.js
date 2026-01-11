@@ -12,8 +12,8 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  // 1. Get Tour data from collection
-  const tours = await Tour.find();
+  // 1. Get Tour data from collection with optimized field selection
+  const tours = await Tour.find().select('name price ratingsAverage summary difficulty duration imageCover slug');
 
   // 2. Build template
 
@@ -25,11 +25,18 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 });
 
 exports.getDestinations = catchAsync(async (req, res, next) => {
-  // 1. Get featured tours data from collection
-  const featuredTours = await Tour.find({
-    ratingsAverage: { $gte: 4.5 },
-  }).limit(6);
-  const allTours = await Tour.find();
+  // 1. Optimize: Get all needed data in parallel with field selection
+  const [featuredTours, allTours] = await Promise.all([
+    Tour.find({
+      ratingsAverage: { $gte: 4.5 },
+    })
+      .select('name price ratingsAverage summary difficulty duration imageCover slug')
+      .limit(6)
+      .lean(), // Use lean() for read-only operations to improve performance
+    Tour.find()
+      .select('difficulty')
+      .lean(), // Only select difficulty field for counting
+  ]);
 
   // 2. Create destination categories
   const destinations = [
@@ -72,16 +79,20 @@ exports.getDestinations = catchAsync(async (req, res, next) => {
 });
 
 exports.getStories = catchAsync(async (req, res, next) => {
-  // 1. Get tours with reviews for stories
+  // 1. Get tours with reviews for stories - optimized with field selection
   const toursWithReviews = await Tour.find({ ratingsQuantity: { $gte: 5 } })
+    .select('name imageCover slug startLocation duration reviews')
     .populate({
       path: 'reviews',
+      select: 'review rating createdAt user',
+      options: { sort: { createdAt: -1 }, limit: 1 }, // Only get the most recent review
       populate: {
         path: 'user',
         select: 'name photo',
       },
     })
-    .limit(8);
+    .limit(8)
+    .lean(); // Use lean() for better performance on read-only operations
 
   // 2. Create travel stories from reviews
   const travelStories = toursWithReviews.map((tour) => {
@@ -137,10 +148,20 @@ exports.getStories = catchAsync(async (req, res, next) => {
 
 exports.getTour = catchAsync(async (req, res, next) => {
   // 1. Get the data, for the requested tour (including reviews and tour-guides)
-  const tour = await Tour.findOne({ slug: req.params.slug }).populate({
-    path: 'reviews',
-    fields: 'review rating user',
-  });
+  // Optimized: Use lean() for better performance and select specific fields
+  const tour = await Tour.findOne({ slug: req.params.slug })
+    .populate({
+      path: 'reviews',
+      select: 'review rating createdAt user',
+      populate: {
+        path: 'user',
+        select: 'name photo',
+      },
+    })
+    .populate({
+      path: 'guides',
+      select: 'name photo role',
+    });
 
   if (!tour) {
     return next(new AppError('There is no tour with that name.'));
@@ -180,12 +201,16 @@ exports.getAccount = (req, res) => {
 };
 
 exports.getMyTours = catchAsync(async (req, res, next) => {
-  // 1. Find all bookings
-  const bookings = await Booking.find({ user: req.user.id });
+  // 1. Find all bookings with optimized field selection
+  const bookings = await Booking.find({ user: req.user.id })
+    .select('tour')
+    .lean();
 
-  // 2. Find tours with the returened IDs
+  // 2. Find tours with the returned IDs - optimized with field selection
   const tourIDs = bookings.map((el) => el.tour);
-  const tours = await Tour.find({ _id: { $in: tourIDs } });
+  const tours = await Tour.find({ _id: { $in: tourIDs } })
+    .select('name price ratingsAverage summary difficulty duration imageCover slug')
+    .lean();
 
   res.status(200).render('overview', {
     url: req.url,

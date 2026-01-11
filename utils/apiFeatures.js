@@ -48,10 +48,14 @@ class APIFeatures {
   paginate() {
     // 4. Pagination
     const page = +this.queryString.page || 1;
-    const limit = +this.queryString.limit || 100;
+    const limit = +this.queryString.limit || 20; // Reduced default from 100 to 20 for better performance
     const skip = (page - 1) * limit;
 
-    this.query = this.query.skip(skip).limit(limit);
+    // Prevent excessive pagination
+    const maxLimit = 100;
+    const finalLimit = limit > maxLimit ? maxLimit : limit;
+
+    this.query = this.query.skip(skip).limit(finalLimit);
 
     return this;
   }

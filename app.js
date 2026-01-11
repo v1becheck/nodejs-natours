@@ -35,8 +35,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cors());
 app.options('*', cors());
 
-// Serving static files
-app.use(express.static(path.join(__dirname, 'public')));
+// Serving static files with caching and optimization
+app.use(
+  express.static(path.join(__dirname, 'public'), {
+    maxAge: process.env.NODE_ENV === 'production' ? '1y' : '0', // Cache for 1 year in production
+    etag: true, // Enable ETag generation
+    lastModified: true, // Enable Last-Modified headers
+    setHeaders: (res, path) => {
+      // Set specific cache headers for different file types
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+      } else if (path.match(/\.(jpg|jpeg|png|gif|ico|svg|webp)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      } else if (path.match(/\.(css|js)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+    },
+  })
+);
 
 // Set security HTTP headers
 app.use(
@@ -89,7 +105,7 @@ if (!fs.existsSync(logDir)) {
 const accessLogPath = path.join(logDir, 'access.log');
 const accessLogStream = fs.createWriteStream(accessLogPath, { flags: 'a' });
 
-// Production logging
+// Production logging - only log to file, not console
 if (process.env.NODE_ENV === 'production') {
   app.use(
     morgan(
@@ -97,7 +113,7 @@ if (process.env.NODE_ENV === 'production') {
       { stream: accessLogStream }
     )
   );
-  app.use(morgan('combined'));
+  // Removed duplicate morgan('combined') to reduce overhead
 }
 
 // Limit requests from same IP
@@ -140,8 +156,21 @@ app.use(
   })
 );
 
-// Compress the text sent to the clients
-app.use(compression());
+// Compress the text sent to the clients with optimization
+app.use(
+  compression({
+    level: 6, // Compression level (1-9, 6 is a good balance)
+    threshold: 1024, // Only compress responses larger than 1KB
+    filter: (req, res) => {
+      // Don't compress if client doesn't support it
+      if (req.headers['x-no-compression']) {
+        return false;
+      }
+      // Use compression for all other requests
+      return compression.filter(req, res);
+    },
+  })
+);
 
 // Test middleware
 app.use((req, res, next) => {

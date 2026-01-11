@@ -179,9 +179,10 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
     );
   }
 
+  // Optimize query with field selection for better performance
   const tours = await Tour.find({
     startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
-  });
+  }).select('-__v -createdAt');
 
   res.status(200).json({
     status: 'success',

@@ -114,8 +114,8 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-// Compound Sorting Index for price in ascending order and ragingAverage in descending order
-tourSchema.index({ price: 1, ragingAverage: -1 });
+// Compound Sorting Index for price in ascending order and ratingsAverage in descending order
+tourSchema.index({ price: 1, ratingsAverage: -1 });
 // Sorting Index for slug in ascending order
 tourSchema.index({ slug: 1 });
 // startLocation should be indexed to 2dsphere, necessary for geospatial location

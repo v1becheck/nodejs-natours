@@ -25,6 +25,9 @@ const bookingSchema = new mongoose.Schema({
   },
 });
 
+// Index for frequently queried user field
+bookingSchema.index({ user: 1, createdAt: -1 });
+
 bookingSchema.pre(/^find/, function (next) {
   this.populate('user').populate({
     path: 'tour',
