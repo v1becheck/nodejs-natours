@@ -2,7 +2,7 @@
 
 Tourism web application focusing on using back-end best practices.<br>
 
-Live: https://natours-production-milos.up.railway.app/ 
+Demo: https://natours-production-milos.up.railway.app/ 
 
 --------------
 
@@ -32,7 +32,7 @@ Pug<br>
 -------------
 
 ***Includes:***<br>
--CRUD operations with MongoDB on the Atlas platform (in the cloud).<br>
+-CRUD operations with MongoDB on the Atlas platform.<br>
 -RESTful API design with advanced features (filtering, sorting, aliasing, pagination).<br> 
 -Server-side website rendering (HTML) with Pug templates.<br>
 -MongoDB: geospatial queries, aggregation pipeline, and operators.<br>
