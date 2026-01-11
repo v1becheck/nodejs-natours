@@ -10,8 +10,16 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
+// Load environment variables from config.env if it exists (local development)
+// Railway uses environment variables directly, so this will only work locally
 dotenv.config({ path: './config.env' });
 const app = require('./app');
+
+// Validate required environment variables
+if (!process.env.DATABASE || !process.env.USERNAME || !process.env.DATABASE_PASSWORD) {
+  console.error('Missing required environment variables: DATABASE, USERNAME, or DATABASE_PASSWORD');
+  process.exit(1);
+}
 
 const DB = process.env.DATABASE.replace(
   '<USERNAME>',
@@ -32,6 +40,12 @@ mongoose
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('DB connection successful!');
+  })
+  .catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error('DB connection error:', err);
+    // Don't exit immediately - let the server start and retry
+    // Railway health checks need the server to be listening
   });
 
 // Generating SelfSigned SSL for local development - (type in tereminal)
@@ -54,7 +68,8 @@ mongoose
 // });
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
+// Bind to 0.0.0.0 to accept connections from any network interface (required for Railway/Docker)
+const server = app.listen(PORT, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
   console.log(`App running on port ${PORT}...`);
 });

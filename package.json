@@ -8,17 +8,18 @@
   },
   "browserslist": "last 2 versions",
   "scripts": {
-    "start": "nodemon server",
-    "start:prod": "SET NODE_ENV=production&&nodemon server",
+    "start": "node server",
+    "start:prod": "NODE_ENV=production node server",
+    "start:dev": "nodemon server",
     "start:backend": "node server",
     "watch:js": "npx parcel watch --no-hmr ./public/js/index.js --dist-dir ./public/js/bundled",
     "clean": "npx parcel clean",
-    "build": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled --no-source-maps && node server.js",
+    "build": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled --no-source-maps",
     "debug": "ndb server.js"
   },
   "engines": {
-    "node": ">22.x",
-    "npm": ">11.x"
+    "node": ">=22.0.0",
+    "npm": ">=11.0.0"
   },
   "repository": {
     "type": "git",
