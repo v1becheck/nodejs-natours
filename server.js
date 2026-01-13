@@ -21,10 +21,14 @@ if (!process.env.DATABASE || !process.env.USERNAME || !process.env.DATABASE_PASS
   process.exit(1);
 }
 
+// URL-encode username and password to handle special characters
+const encodedUsername = encodeURIComponent(process.env.USERNAME);
+const encodedPassword = encodeURIComponent(process.env.DATABASE_PASSWORD);
+
 const DB = process.env.DATABASE.replace(
   '<USERNAME>',
-  process.env.USERNAME
-).replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+  encodedUsername
+).replace('<PASSWORD>', encodedPassword);
 
 mongoose
   // .connect(process.env.DATABASE_LOCAL, {
