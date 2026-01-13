@@ -79,9 +79,10 @@ exports.getDestinations = catchAsync(async (req, res, next) => {
 });
 
 exports.getStories = catchAsync(async (req, res, next) => {
-  // 1. Get tours with reviews for stories - optimized with field selection
+  // 1. Get tours with reviews for stories
+  // Note: Cannot use lean() with virtual populate - virtual populate requires Mongoose documents
   const toursWithReviews = await Tour.find({ ratingsQuantity: { $gte: 5 } })
-    .select('name imageCover slug startLocation duration reviews')
+    .select('name imageCover slug startLocation duration')
     .populate({
       path: 'reviews',
       select: 'review rating createdAt user',
@@ -91,26 +92,41 @@ exports.getStories = catchAsync(async (req, res, next) => {
         select: 'name photo',
       },
     })
-    .limit(8)
-    .lean(); // Use lean() for better performance on read-only operations
+    .limit(8);
 
-  // 2. Create travel stories from reviews
-  const travelStories = toursWithReviews.map((tour) => {
-    const recentReview = tour.reviews[tour.reviews.length - 1];
-    return {
-      id: tour._id,
-      tourName: tour.name,
-      tourImage: tour.imageCover,
-      tourSlug: tour.slug,
-      story: recentReview.review,
-      author: recentReview.user.name,
-      authorPhoto: recentReview.user.photo,
-      rating: recentReview.rating,
-      date: recentReview.createdAt,
-      location: tour.startLocation.description,
-      duration: tour.duration,
-    };
-  });
+  // 2. Create travel stories from reviews - filter out tours without valid reviews
+  const travelStories = toursWithReviews
+    .map((tour) => {
+      // Convert to plain object if needed
+      const tourObj = tour.toObject ? tour.toObject() : tour;
+      
+      // Strict validation - ensure reviews exist and are valid
+      if (!tourObj.reviews || !Array.isArray(tourObj.reviews) || tourObj.reviews.length === 0) {
+        return null;
+      }
+      
+      const recentReview = tourObj.reviews[tourObj.reviews.length - 1];
+      
+      // Additional safety check - ensure review has all required fields
+      if (!recentReview || !recentReview.review || !recentReview.user || !recentReview.user.name) {
+        return null;
+      }
+      
+      return {
+        id: tourObj._id,
+        tourName: tourObj.name,
+        tourImage: tourObj.imageCover,
+        tourSlug: tourObj.slug,
+        story: recentReview.review,
+        author: recentReview.user.name,
+        authorPhoto: recentReview.user.photo || 'default.jpg',
+        rating: recentReview.rating || 0,
+        date: recentReview.createdAt || new Date(),
+        location: tourObj.startLocation?.description || 'Location not specified',
+        duration: tourObj.duration || 0,
+      };
+    })
+    .filter((story) => story !== null); // Remove null entries
 
   // 3. Create featured stories (top rated)
   const featuredStories = travelStories.slice(0, 3);
