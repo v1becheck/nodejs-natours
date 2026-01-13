@@ -30,7 +30,7 @@ exports.getDestinations = catchAsync(async (req, res, next) => {
     Tour.find({
       ratingsAverage: { $gte: 4.5 },
     })
-      .select('name price ratingsAverage summary difficulty duration imageCover slug')
+      .select('name price ratingsAverage summary difficulty duration imageCover slug startLocation maxGroupSize')
       .limit(6)
       .lean(), // Use lean() for read-only operations to improve performance
     Tour.find()
