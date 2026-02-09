@@ -73,18 +73,21 @@ block content
                 h3.featured-tour__title= tour.name
                 p.featured-tour__summary= tour.summary
                 .featured-tour__details
-                  .featured-tour__detail
-                    svg.featured-tour__icon
-                      use(xlink:href='img/icons.svg#icon-map-pin')
-                    span= tour.startLocation.description
-                  .featured-tour__detail
-                    svg.featured-tour__icon
-                      use(xlink:href='img/icons.svg#icon-calendar')
-                    span= `${tour.duration} days`
-                  .featured-tour__detail
-                    svg.featured-tour__icon
-                      use(xlink:href='img/icons.svg#icon-user')
-                    span= `${tour.maxGroupSize} people`
+                  if tour.startLocation && tour.startLocation.description
+                    .featured-tour__detail
+                      svg.featured-tour__icon
+                        use(xlink:href='img/icons.svg#icon-map-pin')
+                      span= tour.startLocation.description
+                  if tour.duration
+                    .featured-tour__detail
+                      svg.featured-tour__icon
+                        use(xlink:href='img/icons.svg#icon-calendar')
+                      span= `${tour.duration} days`
+                  if tour.maxGroupSize
+                    .featured-tour__detail
+                      svg.featured-tour__icon
+                        use(xlink:href='img/icons.svg#icon-user')
+                      span= `${tour.maxGroupSize} people`
                 .featured-tour__footer
                   .featured-tour__price
                     span.featured-tour__price-value= `$${tour.price}`
