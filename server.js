@@ -13,6 +13,9 @@ process.on('uncaughtException', (err) => {
 // Load environment variables from config.env if it exists (local development)
 // Railway uses environment variables directly, so this will only work locally
 dotenv.config({ path: './config.env' });
+
+// Suppress Mongoose strictQuery deprecation warning
+mongoose.set('strictQuery', true);
 const app = require('./app');
 
 // Validate required environment variables
@@ -41,7 +44,6 @@ mongoose
     serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     bufferCommands: false, // Disable mongoose buffering
-    bufferMaxEntries: 0, // Disable mongoose buffering
   })
   .then(() => {
     // eslint-disable-next-line no-console
