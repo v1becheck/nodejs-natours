@@ -11,7 +11,7 @@ Test username: monica@example.com<br>
 Test password: test1234<br>
 Or Sign up with your own (You can use mailsac.com if you dont want to use your own email).<br>
 <br>
-Use dummy credit card credentials if you wish to book a tour:<br><br>
+Use dummy credit card credentials if you wish to test booking a tour:<br><br>
 <em>Card information:</em><br>
 CC Number: 4242 4242 4242 4242 (this is a test card)<br>
 Expiry date: Use date and CVC which first come to your mind<br>
