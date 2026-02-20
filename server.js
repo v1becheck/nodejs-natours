@@ -30,6 +30,8 @@ const DB = process.env.DATABASE.replace(
   encodedUsername
 ).replace('<PASSWORD>', encodedPassword);
 
+let server;
+
 mongoose
   // .connect(process.env.DATABASE_LOCAL, {
   .connect(DB, {
@@ -44,12 +46,18 @@ mongoose
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('DB connection successful!');
+
+    const PORT = process.env.PORT || 5000;
+    // Bind to 0.0.0.0 to accept connections from any network interface (required for Railway/Docker)
+    server = app.listen(PORT, '0.0.0.0', () => {
+      // eslint-disable-next-line no-console
+      console.log(`App running on port ${PORT}...`);
+    });
   })
   .catch((err) => {
     // eslint-disable-next-line no-console
     console.error('DB connection error:', err);
-    // Don't exit immediately - let the server start and retry
-    // Railway health checks need the server to be listening
+    process.exit(1);
   });
 
 // Generating SelfSigned SSL for local development - (type in tereminal)
@@ -71,24 +79,25 @@ mongoose
 //   console.log('Secure server is running on https://localhost:5001');
 // });
 
-const PORT = process.env.PORT || 5000;
-// Bind to 0.0.0.0 to accept connections from any network interface (required for Railway/Docker)
-const server = app.listen(PORT, '0.0.0.0', () => {
-  // eslint-disable-next-line no-console
-  console.log(`App running on port ${PORT}...`);
-});
-
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
   console.log('UNHANDLED REJECTION! Shutting down...');
-  server.close(() => {
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
     process.exit(1);
-  });
+  }
 });
 
 process.on('SIGTERM', () => {
   console.log('SIGTERM RECEIVED. Shutting down gracefully.');
-  server.close(() => {
-    console.log('Process terminated');
-  });
+  if (server) {
+    server.close(() => {
+      console.log('Process terminated');
+    });
+  } else {
+    process.exit(0);
+  }
 });
