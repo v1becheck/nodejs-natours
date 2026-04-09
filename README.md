@@ -2,7 +2,7 @@
 
 Tourism web application focusing on using back-end best practices.<br>
 
-<!-- Demo: https://natours-production-milos.up.railway.app/ -->
+<!-- Demo: https://natours-production-milos.up.railway.app/ 
 
 --------------
 
@@ -18,7 +18,7 @@ Expiry date: Use date and CVC which first come to your mind<br>
 Name: Use name that you like<br>
 State: Pick one that you like<br>
 <br>
-Invalid test card: 4000 0000 0000 0341
+Invalid test card: 4000 0000 0000 0341 -->
 
 --------------
 ***Tech stack:***<br>
